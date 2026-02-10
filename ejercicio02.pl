@@ -1,0 +1,36 @@
+%ejercicio2 animales
+perro(firulais).
+perro(bruno).
+perro(max).
+gato(misu).
+gato(luna).
+gato(chanel).
+gato(orion).
+ave(piolin).
+
+dueno(ana, firulais).
+dueno(ana, misu).
+dueno(luis, luna).
+dueno(luis, orion).
+dueno(luis, firulais).
+dueno(maria, piolin).
+dueno(julia, chanel).
+dueno(pedro, bruno).
+%------------------------------------------------
+% NUEVAS FUNCIONES
+propietarios_perro(X, Y) :- perro(Y), dueno(X, Y).
+propietarios_gato(X, Y) :- gato(Y), dueno(X, Y).
+propietarios_multiples(X) :- dueno(X, Y), dueno(X, Z), Y \= Z.
+amante_animales(X) :- perro(Y), dueno(X, Y), gato(G), dueno(X, G).
+mascota_compartida(X) :- dueno(X, Y), dueno(Z, Y), X\=Z.
+tipo_mascota(X, perro) :- dueno(X, A), perro(A).
+tipo_mascota(X, gato) :- dueno(X, A), gato(A).
+tipo_mascota(X, ave) :- dueno(X, A), ave(A).
+
+%-------------------------------------------------
+% QUERYS
+% propietarios_perro(X, Y): X= ana Y= firulais, X= luis Y= firulais, X= pedro Y= bruno.
+% propietarios_gato(X, Y): X= ana Y= misu, X= luis Y= luna, X= julia Y= chanel, X= luis Y= orion.
+% propietarios_multiples(X): X= ana*2, X= luis*6
+% amante_animales(X): X = ana, X = luis*2
+% tipo_mascota(luis, X) "busca q tipo de mascota tiene luis" X = perro, X = gato*2
